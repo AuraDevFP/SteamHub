@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Steam Hub — премиальная база знаний Steam, инструменты и гайды.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>Steam Hub — Твой Steam. Твои правила.</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>БАЗА ЗНАНИЙ STEAM</small></span>
+  </a> 
+  <nav>
+    <a href="#library">База знаний</a>
+    <a href="#about">О проекте</a>
+    <a href="redirect.html?url=https://steamcommunity.com" target="_blank" rel="noreferrer">Steam ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow"><i></i> БАЗА ЗНАНИЙ STEAM · 2026</span>
+    <h1>Твой Steam.<br><span class="gradient">Твои правила.</span></h1>
+    <p><b>Steam Hub</b>: карточки, расширения, полезные сайты, настройки аккаунта, безопасность и понятные пошаговые инструкции - <b>в одном месте</b>.</p>
+    <div class="hero-actions">
+      <a class="button primary" href="#library">Изучить возможности <b>↘</b></a>
+      <a class="button ghost" href="redirect.html?url=https%3A%2F%2Ffunpay.com%2Fusers%2F8180891%2F">ShizzyBoost - FunPay ↗</a>
+    </div>
+    <div class="hero-stats">
+      <span><b>12</b> подробных разделов</span>
+      <span><b>100+</b> уникальных пользователей</span>
+    </div>
+  </div>
+  <div class="hero-art" aria-label="Абстрактная эмблема Steam Hub">
+    <div class="orb"><img class="orb-logo" src="assets/logo.svg" alt="Steam Hub"></div>
+    <div class="art-caption">YOUR STEAM<br><b>YOUR RULES</b></div>
+  </div>
+  <div class="hero-watermark">STEAM</div>
+</section>
+
+<section id="library" class="library section">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">ИССЛЕДУЙ STEAMHUB</span>
+      <h2>База знаний</h2>
+      <p>Разбирайся в Steam быстрее: инструкции, советы и полезные решения - в одном разделе.</p>
+    </div>
+    <label class="search">
+      <span>⌕</span>
+      <input id="search" type="search" placeholder="Найди гайд, инструмент..." aria-label="Поиск по разделам">
+    </label>
+  </div>
+
+  <div class="guide-grid" id="guide-grid">
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/invisible-nick.html" aria-label="Открыть: Невидимый ник">
+        <img class="card-image" src="assets/ник.png" alt="Невидимый ник" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">01 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/invisible-nick.html">Невидимый ник</a>
+        <p class="card-desc">Специальные символы и оформление имени профиля Steam.</p>
+        <div class="card-links">
+          <a href="pages/invisible-nick.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://steamcommunity.com/my/edit/info" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/achievements-hours.html" aria-label="Открыть: Достижения и часы">
+        <img class="card-image" src="assets/часы.png" alt="Достижения и часы" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">02 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/achievements-hours.html">Достижения и часы</a>
+        <p class="card-desc">Инструмент для статистики достижений и игрового времени.</p>
+        <div class="card-links">
+          <a href="pages/achievements-hours.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://steamcommunity.com/my/games/%3Ftab%3Dall" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/profile-level.html" aria-label="Открыть: Профиль и уровень">
+        <img class="card-image" src="assets/profil.png" alt="Профиль и уровень" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">03 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/profile-level.html">Профиль и уровень</a>
+        <p class="card-desc">Карточки, значки, витрины и оформление профиля.</p>
+        <div class="card-links">
+          <a href="pages/profile-level.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://steamcommunity.com/my" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/extensions.html" aria-label="Открыть: Расширения Steam">
+        <img class="card-image" src="assets/rashi.png" alt="Расширения Steam" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">04 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/extensions.html">Расширения Steam</a>
+        <p class="card-desc">Расширения браузера для улучшения Steam.</p>
+        <div class="card-links">
+          <a href="pages/extensions.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://augmentedsteam.com/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/steamdb.html" aria-label="Открыть: SteamDB и сервисы">
+        <img class="card-image" src="assets/steamdb.png" alt="SteamDB и сервисы" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">05 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/steamdb.html">SteamDB и сервисы</a>
+        <p class="card-desc">История цен, статистика приложений и данные Steam.</p>
+        <div class="card-links">
+          <a href="pages/steamdb.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://steamdb.info/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/sales-calendar.html" aria-label="Открыть: Распродажи и фестивали">
+        <img class="card-image" src="assets/kalendar.png" alt="Распродажи и фестивали" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">06 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/sales-calendar.html">Распродажи и фестивали</a>
+        <p class="card-desc">События, скидки и фестивали в магазине Steam.</p>
+        <div class="card-links">
+          <a href="pages/sales-calendar.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://store.steampowered.com" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/account-security.html" aria-label="Открыть: Безопасность аккаунта">
+        <img class="card-image" src="assets/sec.png" alt="Безопасность аккаунта" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">07 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/account-security.html">Безопасность аккаунта</a>
+        <p class="card-desc">Официальные настройки безопасности и поддержка Steam.</p>
+        <div class="card-links">
+          <a href="pages/account-security.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/email-transfer.html" aria-label="Открыть: Почта и перенос">
+        <img class="card-image" src="assets/mail.png" alt="Почта и перенос" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">08 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/email-transfer.html">Почта и перенос</a>
+        <p class="card-desc">Управление аккаунтом и помощь со сменой данных.</p>
+        <div class="card-links">
+          <a href="pages/email-transfer.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/storage-purchases.html" aria-label="Открыть: Покупки и расходы">
+        <img class="card-image" src="assets/buy.png" alt="Покупки и расходы" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">09 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/storage-purchases.html">Покупки и расходы</a>
+        <p class="card-desc">История покупок, кошелёк и запрос возврата средств.</p>
+        <div class="card-links">
+          <a href="pages/storage-purchases.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://store.steampowered.com/account/history/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/family-sharing.html" aria-label="Открыть: Семейный доступ">
+        <img class="card-image" src="assets/family.png" alt="Семейный доступ" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">10 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/family-sharing.html">Семейный доступ</a>
+        <p class="card-desc">Актуальная информация о Steam Families.</p>
+        <div class="card-links">
+          <a href="pages/family-sharing.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://store.steampowered.com/family/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/offline-mode.html" aria-label="Открыть: Офлайн-режим">
+        <img class="card-image" src="assets/off.png" alt="Офлайн-режим" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">11 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/offline-mode.html">Офлайн-режим</a>
+        <p class="card-desc">Справка Steam по пользованию офлайн режима.</p>
+        <div class="card-links">
+          <a href="pages/offline-mode.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="guide-card reveal">
+      <a class="card-image-link" href="pages/faq.html" aria-label="Открыть: FAQ и помощь">
+        <img class="card-image" src="assets/faq.png" alt="FAQ и помощь" loading="lazy" onerror="this.closest('.card-image-link').classList.add('image-fallback');this.remove()">
+        <span class="image-shade"></span>
+        <span class="image-number">12 / STEAM HUB</span>
+      </a>
+      <div class="card-body">
+        <a class="card-title" href="pages/faq.html">FAQ и помощь</a>
+        <p class="card-desc">Официальные ответы и решение распространённых проблем.</p>
+        <div class="card-links">
+          <a href="pages/faq.html">Гайд <b>↗</b></a>
+          <a href="redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис <b>↗</b></a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <p id="empty" class="empty" hidden>Ничего не найдено. Попробуй другой запрос.</p>
+</section>
+
+<section id="about" class="about section">
+  <span class="eyebrow">СОЗДАН ДЛЯ ПОЛЬЗОВАТЕЛЕЙ STEAM</span>
+  <h2>Меньше поиска.<br><span class="gradient">Больше возможностей.</span></h2>
+  <p><b>Steam Hub</b> - пространство полезных возможностей для твоего Steam. Изучай новое и создавай собственный стиль.</p>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
