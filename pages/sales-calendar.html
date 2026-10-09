@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Календарь событий из исходного сайта. Даты могут меняться — сверяй их с новостями Steam.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Распродажи и фестивали Steam — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 06</span>
+      <h1>Распродажи и фестивали Steam</h1>
+      <p>Календарь событий STEAM - Даты могу отличаться (Если STEAM сменили график).</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть магазин Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel sale-calendar-panel">
+    <h2>Календарь событий Steam</h2>
+    <p class="tip">Статус каждого события рассчитывается автоматически по текущей дате и времени устройства.</p>
+
+    <div class="calendar-summary" id="calendar-summary" aria-live="polite">
+      <span class="calendar-live-dot"></span>
+      <span>Определяем текущие события…</span>
+    </div>
+
+    <div class="calendar-filters" role="group" aria-label="Фильтр событий">
+      <button class="calendar-filter active" type="button" data-filter="all">Все события</button>
+      <button class="calendar-filter" type="button" data-filter="past">Прошла</button>
+      <button class="calendar-filter" type="button" data-filter="upcoming">Ожидается</button>
+      <button class="calendar-filter" type="button" data-filter="live">Идёт сейчас</button>
+    </div>
+
+    <div class="sale-event-list" id="sale-event-list" aria-live="polite"></div>
+
+    <noscript>
+      <p>Для автоматического определения статусов включи JavaScript в браузере.</p>
+    </noscript>
+
+    <script>
+    (() => {
+      // Даты из календарного списка проекта. Время указано локальное для устройства.
+      const events = [
+        {name:'Зимняя распродажа', start:'2025-12-18', end:'2026-01-05', kind:'sale'},
+        {name:'Фестиваль детективов', start:'2026-01-12', end:'2026-01-19'},
+        {name:'Фестиваль настольных игр', start:'2026-01-26', end:'2026-02-02'},
+        {name:'Фестиваль печатания', start:'2026-02-05', end:'2026-02-09'},
+        {name:'Фестиваль сражений между игроками', start:'2026-02-09', end:'2026-02-16'},
+        {name:'Фестиваль игр про лошадей', start:'2026-02-19', end:'2026-02-23'},
+        {name:'Фестиваль «Играм быть»', start:'2026-02-23', end:'2026-03-02'},
+        {name:'Фестиваль башенной защиты', start:'2026-03-09', end:'2026-03-16'},
+        {name:'Весенняя распродажа', start:'2026-03-19', end:'2026-03-26', kind:'sale'},
+        {name:'Фестиваль дома и интерьера', start:'2026-03-30', end:'2026-04-06'},
+        {name:'Фестиваль поиска предметов', start:'2026-04-09', end:'2026-04-13'},
+        {name:'Фестиваль Средневековья', start:'2026-04-20', end:'2026-04-27'},
+        {name:'Фестиваль построения колод', start:'2026-05-04', end:'2026-05-11'},
+        {name:'Фестиваль морей и океанов', start:'2026-05-18', end:'2026-05-25'},
+        {name:'Фестиваль пуль', start:'2026-06-08', end:'2026-06-15'},
+        {name:'Фестиваль «Играм быть»', start:'2026-06-15', end:'2026-06-22'},
+        {name:'Летняя распродажа', start:'2026-06-25', end:'2026-07-09', kind:'sale'},
+        {name:'Фестиваль социальной дедукции', start:'2026-07-13', end:'2026-07-16'},
+        {name:'Фестиваль поездов', start:'2026-07-20', end:'2026-07-27'},
+        {name:'Фестиваль киберпанка', start:'2026-08-03', end:'2026-08-10'},
+        {name:'Фестиваль кеглей и колышков', start:'2026-08-17', end:'2026-08-20'},
+        {name:'Фестиваль программирования', start:'2026-09-10', end:'2026-09-14'},
+        {name:'Осенняя распродажа', start:'2026-10-01', end:'2026-10-08', kind:'sale'},
+        {name:'Кулинарный фестиваль', start:'2026-10-12', end:'2026-10-19'},
+        {name:'Фестиваль «Играм быть»', start:'2026-10-19', end:'2026-10-26'},
+        {name:'Фестиваль «Страхи в Steam 5»', start:'2026-10-26', end:'2026-11-02'},
+        {name:'Фестиваль ролевых автобаттлеров', start:'2026-11-16', end:'2026-11-23'},
+        {name:'Чёрная пятница', start:null, end:null, unknown:true},
+        {name:'Зимняя распродажа', start:'2026-12-17', end:'2027-01-04', kind:'sale'}
+      ];
+
+      const list = document.getElementById('sale-event-list');
+      const summary = document.getElementById('calendar-summary');
+      const buttons = [...document.querySelectorAll('.calendar-filter')];
+      let filter = 'all';
+
+      const dateFmt = new Intl.DateTimeFormat('ru-RU', {day:'numeric', month:'long'});
+      const midnight = value => {
+        const [y,m,d] = value.split('-').map(Number);
+        return new Date(y,m-1,d,0,0,0,0);
+      };
+
+      const statusOf = (event, now) => {
+        if (event.unknown) return 'unknown';
+        const start = midnight(event.start);
+        const endExclusive = new Date(midnight(event.end).getTime() + 86400000);
+        if (now < start) return 'upcoming';
+        if (now < endExclusive) return 'live';
+        return 'past';
+      };
+
+      const statusText = {
+        past:'Прошла',
+        upcoming:'Ожидается',
+        live:'Идёт сейчас',
+        unknown:'Дата не объявлена'
+      };
+
+      const fmtRange = e => e.unknown
+        ? 'Дата пока не объявлена'
+        : `${dateFmt.format(midnight(e.start))} — ${dateFmt.format(midnight(e.end))}`;
+
+      function render(){
+        const now = new Date();
+        const today = new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric'}).format(now);
+        const enriched = events.map((e,i)=>({...e,index:i,status:statusOf(e,now)}));
+        const counts = {past:0,upcoming:0,live:0,unknown:0};
+        enriched.forEach(e=>counts[e.status]++);
+        const current = enriched.filter(e=>e.status==='live');
+
+        summary.innerHTML = `<span class="calendar-live-dot"></span><span>Сегодня: <b>${today}</b> · <b>${current.length}</b> событий идёт · обновление в реальном времени</span>`;
+
+        const visible = enriched.filter(e => filter==='all' || e.status===filter);
+
+        list.innerHTML = visible.map(e=>`<article class="sale-event ${e.status==='live'?'is-live':''}">
+          <div class="sale-event-date"><span>${e.kind==='sale'?'РАСПРОДАЖА':'СОБЫТИЕ'}</span><b>${e.unknown?'—':dateFmt.format(midnight(e.start)).replace(/\sг\.$/,'')}</b></div>
+          <div class="sale-event-info"><h3>${e.name}</h3><p>${fmtRange(e)}</p></div>
+          <span class="sale-status status-${e.status}">${statusText[e.status]}</span>
+        </article>`).join('') || '<p class="empty-calendar">В этой категории пока нет событий.</p>';
+
+        buttons.forEach(b=>b.classList.toggle('active',b.dataset.filter===filter));
+      }
+
+      buttons.forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;render()}));
+      render();
+      setInterval(render,30000);
+    })();
+    </script>
+
+    <p class="calendar-disclaimer">
+
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Как отслеживать скидки</h2>
+    <p>Открывай страницу магазина, список желаемого и историю цен в SteamDB. Цены и даты событий могут отличаться по региону.</p>
+    <p>
+      <a href="../redirect.html?url=https://store.steampowered.com/wishlist/" target="_blank" rel="noopener noreferrer">Список желаемого Steam</a>
+      ·
+      <a href="../redirect.html?url=https://steamdb.info/" target="_blank" rel="noopener noreferrer">SteamDB</a>
+    </p>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

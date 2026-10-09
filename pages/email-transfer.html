@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Пошаговая памятка по изменению контактного адреса и восстановлению доступа.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Смена почты Steam — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 07</span>
+      <h1>Смена почты Steam</h1>
+      <p>Пошаговая памятка по изменению контактного адреса и восстановлению доступа.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть поддержку Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Через клиент Steam</h2>
+    <ol>
+      <li>Открой меню Steam → «Настройки».</li>
+      <li>Перейди в раздел «Аккаунт».</li>
+      <li>Выбери изменение контактного адреса электронной почты.</li>
+      <li>Следуй инструкциям на экране и подтверди действие запрошенным способом.</li>
+      <li>Проверь почту, включая папку «Спам», и введи код подтверждения, если его запросит Steam.</li>
+    </ol>
+    <p><b>Названия пунктов могут отличаться в зависимости от версии клиента.</b></p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Через браузер</h2>
+    <ol>
+      <li>Открой официальный сайт Steam и войди в аккаунт.</li>
+      <li>Перейди в настройки аккаунта и контактную информацию.</li>
+      <li>Выбери изменение адреса и выполни проверку безопасности.</li>
+      <li>Подтверди новый адрес по инструкции в письме.</li>
+    </ol>
+    <p>
+      <a href="../redirect.html?url=https://store.steampowered.com/account/" target="_blank" rel="noopener noreferrer">Настройки аккаунта Steam ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Важные последствия</h2>
+    <p>После смены контактных данных Steam может временно ограничить некоторые операции, включая торговлю, в целях защиты аккаунта. Срок зависит от ситуации и требований Steam — ориентируйся на предупреждение, которое показывает сам сервис.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Нет доступа к старой почте</h2>
+    <p>Обратись в <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">официальную поддержку Steam</a>. Подготовь подтверждения владения аккаунтом, например сведения о покупках или ранее использованных способах оплаты. Не публикуй их в открытом доступе.</p>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Скриншот</h2>
+    <p class="media-intro"></p>
+    <div class="media-gallery">
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://blog.kupikod.com/storage/articles-content-img/6PGcRgpTnYt4Q2k4atLq1XaPDddrO03ECO8mJmDd.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="https://blog.kupikod.com/storage/articles-content-img/6PGcRgpTnYt4Q2k4atLq1XaPDddrO03ECO8mJmDd.jpg" alt="Настройки Steam" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Настройки Steam</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://blog.kupikod.com/storage/articles-content-img/qKXLJPqVaBx30GtwFGA2P1uI0fahGjRjwoGBF9cq.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="https://blog.kupikod.com/storage/articles-content-img/qKXLJPqVaBx30GtwFGA2P1uI0fahGjRjwoGBF9cq.jpg" alt="Блокировка торговой площадки" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Блокировка торговой площадки</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://blog.kupikod.com/storage/articles-content-img/6qUtPZCHmnJsJNdrU5mY9YdKKBrtxiSfNq4l59S4.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="https://blog.kupikod.com/storage/articles-content-img/6qUtPZCHmnJsJNdrU5mY9YdKKBrtxiSfNq4l59S4.jpg" alt="Поддержка Steam" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Поддержка Steam</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

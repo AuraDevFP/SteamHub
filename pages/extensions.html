@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Подборка браузерных расширений и правила безопасной установки.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Расширения для Steam — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://augmentedsteam.com/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 04</span>
+      <h1>Расширения для Steam</h1>
+      <p>Подборка браузерных расширений и правила безопасной установки.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://augmentedsteam.com/" target="_blank" rel="noopener noreferrer">Открыть Augmented Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Augmented Steam</h2>
+    <p>Дополняет страницы магазина: показывает дополнительную информацию о ценах, историю цен и полезные сведения о товарах.</p>
+    <p>
+      <a href="../redirect.html?url=https://augmentedsteam.com/" target="_blank" rel="noopener noreferrer">Официальный сайт Augmented Steam ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>SteamDB Extension</h2>
+    <p>Быстрый доступ к данным SteamDB: статистике приложений, ценам и активности игроков.</p>
+    <p>
+      <a href="../redirect.html?url=https://steamdb.info/extension/" target="_blank" rel="noopener noreferrer">SteamDB Extension ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Steam Inventory Helper (SIH)</h2>
+    <p>Расширение для работы с инвентарём и торговыми функциями. Перед установкой внимательно изучи разрешения и политику конфиденциальности.</p>
+    <p>
+      <a href="../redirect.html?url=https://steaminventoryhelper.com/" target="_blank" rel="noopener noreferrer">Сайт Steam Inventory Helper ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Steam Artwork Hub Essentials</h2>
+    <p>Инструменты для работы с витринами оформления профиля и скриншотами.</p>
+    <p>
+      <a href="../redirect.html?url=https://chromewebstore.google.com/" target="_blank" rel="noopener noreferrer">Chrome Web Store ↗</a>
+      ·
+      <a href="../redirect.html?url=https://addons.mozilla.org/" target="_blank" rel="noopener noreferrer">Firefox Add-ons ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Правила безопасности</h2>
+    <ul>
+      <li>Устанавливай расширения только из официального магазина браузера или с официального сайта разработчика.</li>
+      <li>Не скачивай случайные файлы .crx и не отключай защиту браузера.</li>
+      <li>Не вводи пароль Steam Guard и резервные коды на сторонних страницах.</li>
+      <li>Перед установкой проверь издателя, отзывы, разрешения и дату обновления.</li>
+    </ul>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Скриншот</h2>
+    <p class="media-intro"></p>
+    <div class="media-gallery">
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/s-BCxdoaYBxWEMpkk2EDSaYhdcl7VWzPjobSUygH58QfaUtrTYw6pJYSsrVD8FtJpLsknkzmUi7LGP1uGeFJd2H7lbaPlzucJ0jSGP7j1Mcqz8Da7B4rj-lNEloYMuCe5b9X0-E1jsm4/2026-03-27_09-46-32.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/s-BCxdoaYBxWEMpkk2EDSaYhdcl7VWzPjobSUygH58QfaUtrTYw6pJYSsrVD8FtJpLsknkzmUi7LGP1uGeFJd2H7lbaPlzucJ0jSGP7j1Mcqz8Da7B4rj-lNEloYMuCe5b9X0-E1jsm4/2026-03-27_09-46-32.png" alt="Augmented Steam preview" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Augmented Steam preview</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/aNnan-FAVi1lKytebBSSeI_HxmPkXc93pOK4CCTWVJhe105NEDAhhclyxsQ_j2l9ors36n0NzA0X5Yos885EF1r98ekTc_ksMr8Ypy59C91TUWYuoLv8sHO5Nf7TmJfSy7x3B75DqKvZ/2026-03-27_09-47-29.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/aNnan-FAVi1lKytebBSSeI_HxmPkXc93pOK4CCTWVJhe105NEDAhhclyxsQ_j2l9ors36n0NzA0X5Yos885EF1r98ekTc_ksMr8Ypy59C91TUWYuoLv8sHO5Nf7TmJfSy7x3B75DqKvZ/2026-03-27_09-47-29.png" alt="SteamDB extension preview" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>SteamDB extension preview</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/2CFcaWhDoHaDwBTwvgndTCL_N9RQlRvLUPnMsTZieXBPOXmCqA_NbuRKJlwYEiPnlm8hFAahz8044UBAd9uWDuou-xPY6AVp9jkuWlEWFL4LpG_A_UzpRAr8YBNulh1LPSlfmo_gRZs2/2026-03-27_09-48-02.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/2CFcaWhDoHaDwBTwvgndTCL_N9RQlRvLUPnMsTZieXBPOXmCqA_NbuRKJlwYEiPnlm8hFAahz8044UBAd9uWDuou-xPY6AVp9jkuWlEWFL4LpG_A_UzpRAr8YBNulh1LPSlfmo_gRZs2/2026-03-27_09-48-02.png" alt="SIH preview" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>SIH preview</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/Qb7ittJVRC9YNGrfca_ZOhd_z1zbsRqJB1vJX62386QkCZf12qwy-XRutv7EEKP3x3ZGvgZPJYnuXYQYmF6vMZEFC_PrCP5t5Y5VmvcU1DfTD5A3tFiAcbo6YTWCNBu4jqeqLKp64s0T/2026-03-27_09-48-43.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/Qb7ittJVRC9YNGrfca_ZOhd_z1zbsRqJB1vJX62386QkCZf12qwy-XRutv7EEKP3x3ZGvgZPJYnuXYQYmF6vMZEFC_PrCP5t5Y5VmvcU1DfTD5A3tFiAcbo6YTWCNBu4jqeqLKp64s0T/2026-03-27_09-48-43.png" alt="Artwork Hub preview" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Artwork Hub preview</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

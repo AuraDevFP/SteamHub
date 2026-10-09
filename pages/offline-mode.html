@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Как подготовить собственную библиотеку к запуску без подключения к интернету.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Офлайн-режим Steam — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 11</span>
+      <h1>Офлайн-режим Steam</h1>
+      <p>Как подготовить собственную библиотеку к запуску без подключения к интернету.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть поддержку Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Что такое офлайн-режим</h2>
+    <p>Офлайн-режим — штатная функция клиента Steam для запуска совместимых игр без постоянного подключения к интернету. Не каждая игра работает автономно: некоторые требуют онлайн-сервисы, DRM или сетевую авторизацию.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Подготовка</h2>
+    <ol>
+      <li>Войди в собственный аккаунт Steam при подключении к интернету.</li>
+      <li>Установи игру и дождись завершения обновлений.</li>
+      <li>Запусти игру онлайн хотя бы один раз, если этого требует сама игра.</li>
+      <li>Убедись, что необходимые файлы и сохранения доступны локально.</li>
+      <li>В клиенте Steam выбери команду перехода в автономный режим и подтверди её.</li>
+    </ol>
+  </section>
+
+  <section class="content-panel">
+    <h2>Игра без интернета</h2>
+    <p>После перехода в автономный режим попробуй запустить игру из библиотеки. Для проверки можно временно отключить сеть. Облачные сохранения и онлайн-функции без интернета недоступны; локальные сохранения синхронизируются только после подключения, если игра поддерживает Steam Cloud.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Возврат в онлайн</h2>
+    <p>Используй команду возврата в онлайн-режим в меню Steam. Некоторые игры могут потребовать повторную авторизацию или обновление перед запуском.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Частые вопросы</h2>
+    <h3>Как долго работает офлайн-режим?</h3>
+    <p>Единого срока для всех игр нет: это зависит от требований клиента, лицензии и самой игры.</p>
+    <h3>Можно ли играть на двух компьютерах с одним аккаунтом одновременно?</h3>
+    <p>Доступ зависит от правил Steam и конкретной игры. Не передавай данные аккаунта другим людям.</p>
+    <h3>Сохранятся ли сохранения?</h3>
+    <p>Локальные сохранения обычно остаются на устройстве. Облачная синхронизация выполняется при восстановлении соединения, если она поддерживается.</p>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Видеоурок</h2>
+    <p class="media-intro"></p>
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/467yFyX6Pqo?rel=0&modestbranding=1&playsinline=1"
+        title="Видеоурок по офлайн-режиму Steam"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p>
+      <a href="../redirect.html?url=https://www.youtube.com/watch%3Fv%3D467yFyX6Pqo" target="_blank" rel="noopener noreferrer">Открыть видео на YouTube ↗</a>
+    </p>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

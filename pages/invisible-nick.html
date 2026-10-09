@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Как попробовать поставить пустое имя в Steam и что учитывать при отображении в играх.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Невидимый ник — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://steamcommunity.com/my/edit/info" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 01</span>
+      <h1>Невидимый ник</h1>
+      <p>Как попробовать поставить пустое имя в Steam и что учитывать при отображении в играх.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://steamcommunity.com/my/edit/info" target="_blank" rel="noopener noreferrer">Редактировать профиль Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Как установить</h2>
+    <ol>
+      <li>Открой страницу редактирования профиля Steam и найди поле имени профиля.</li>
+      <li>Удали старое имя и попробуй вставить символ-пустышку из примера: <code>(　)</code> — копируй только содержимое скобок.</li>
+      <li>Сохрани изменения и проверь отображение в профиле и клиенте.</li>
+    </ol>
+    <p>Steam может удалять, нормализовать или запрещать отдельные Unicode-символы. Поэтому метод не гарантирован и может перестать работать.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Где проверить</h2>
+    <ul>
+      <li><a href="../redirect.html?url=https://steamcommunity.com/my/" target="_blank" rel="noopener noreferrer">Профиль Steam</a> — проверь имя в веб-версии.</li>
+      <li>Открой клиент Steam и несколько игр, в которых имя отображается отдельно.</li>
+    </ul>
+  </section>
+
+  <section class="content-panel">
+    <h2>Важно</h2>
+    <p>Пустое имя может отображаться как пробел, необычный знак или обычный ник в зависимости от клиента и игры. Не устанавливай сомнительные программы ради изменения имени.</p>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Скриншот</h2>
+    <p class="media-intro"></p>
+    <div class="media-gallery">
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/-F44KdKnm9qChFMVA2h-eZvcWr6y3ZjoakgIM8i3qirTSvw-JvUgZgc7QlvGRggXWwMdzdGlhBLGz127mRVlXG_0r4Dsdtkm5bmAhbilK2Uzse9O5Y0sOyYxt5ZxUiiPQDWOwJ5mCvYI/2026-03-27_09-20-43.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/-F44KdKnm9qChFMVA2h-eZvcWr6y3ZjoakgIM8i3qirTSvw-JvUgZgc7QlvGRggXWwMdzdGlhBLGz127mRVlXG_0r4Dsdtkm5bmAhbilK2Uzse9O5Y0sOyYxt5ZxUiiPQDWOwJ5mCvYI/2026-03-27_09-20-43.png" alt="Пример невидимого ника в профиле Steam" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Пример невидимого ника в профиле Steam</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/Hu9TKIc_k4S4cYC4G5iwnC0rmrh1klgq2Dh1Ywdn3c2-shMxGo4f_UzciSk2L_UHwo8t2ioNSK6F9u7TX2QALIUCMXgL8owEXIQS25iBchyMPlRqJnxfQx7UJ29hWPczPtodVRLWIpvz/2026-03-27_09-23-10.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/Hu9TKIc_k4S4cYC4G5iwnC0rmrh1klgq2Dh1Ywdn3c2-shMxGo4f_UzciSk2L_UHwo8t2ioNSK6F9u7TX2QALIUCMXgL8owEXIQS25iBchyMPlRqJnxfQx7UJ29hWPczPtodVRLWIpvz/2026-03-27_09-23-10.png" alt="Пример невидимого ника в CS" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Пример невидимого ника в CS</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost <span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

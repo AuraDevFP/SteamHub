@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Основные меры защиты, Steam Guard, приватность и действия при взломе.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Безопасность аккаунта Steam — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 09</span>
+      <h1>Безопасность аккаунта Steam</h1>
+      <p>Основные меры защиты, Steam Guard, приватность и действия при взломе.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть поддержку Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Надёжный пароль</h2>
+    <p>Используй уникальный пароль достаточной длины (например, 12–16 символов и более) с разными типами символов. Не повторяй пароль с других сайтов; менеджер паролей поможет хранить его безопасно.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Steam Guard</h2>
+    <p>Включи Steam Guard и по возможности используй мобильный аутентификатор в официальном приложении Steam. Никому не сообщай коды подтверждения и резервные коды.</p>
+    <p>
+      <a href="../redirect.html?url=https://store.steampowered.com/mobile" target="_blank" rel="noopener noreferrer">Steam Mobile ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Приватность профиля</h2>
+    <p>Открой настройки приватности и выставь видимость профиля, списка игр, инвентаря и других данных так, как тебе нужно.</p>
+    <p>
+      <a href="../redirect.html?url=https://steamcommunity.com/my/edit/settings" target="_blank" rel="noopener noreferrer">Настройки приватности ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Фишинг и финансовая безопасность</h2>
+    <ul>
+      <li>Проверяй домен перед входом: официальные страницы Steam используют домены Steam.</li>
+      <li>Не открывай подозрительные ссылки из чатов и комментариев.</li>
+      <li>Не передавай данные карты, пароль, коды Steam Guard и резервные коды.</li>
+      <li>Если знакомый просит деньги или предметы, свяжись с ним другим способом.</li>
+    </ul>
+  </section>
+
+  <section class="content-panel">
+    <h2>Если аккаунт взломали</h2>
+    <ol>
+      <li>Защити электронную почту и смени её пароль.</li>
+      <li>Смени пароль Steam, если можешь войти.</li>
+      <li>Заверши подозрительные сеансы и проверь устройства/авторизации.</li>
+      <li>Если доступа нет, используй восстановление через официальную поддержку Steam.</li>
+    </ol>
+    <p>
+      <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Восстановление аккаунта ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Скриншот</h2>
+    <p class="media-intro"></p>
+    <div class="media-gallery">
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://blog.kupikod.com/storage/articles-content-img/Re628tfaG1pXfExUh2N0AdTZK3Jr4drQVEVvrA7R.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://blog.kupikod.com/storage/articles-content-img/Re628tfaG1pXfExUh2N0AdTZK3Jr4drQVEVvrA7R.png" alt="Приватность" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Приватность</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://blog.kupikod.com/storage/articles-content-img/i60EoWomD0VWu1ttEJt3n3LuNFZrqzrHHgOlmlMD.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="https://blog.kupikod.com/storage/articles-content-img/i60EoWomD0VWu1ttEJt3n3LuNFZrqzrHHgOlmlMD.jpg" alt="Защита от фишинга" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Защита от фишинга</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://blog.kupikod.com/storage/articles-content-img/Qhh5E4oFwjUQ4vvdyOfOJ7TLCkiuQeguWjcZYiPL.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://blog.kupikod.com/storage/articles-content-img/Qhh5E4oFwjUQ4vvdyOfOJ7TLCkiuQeguWjcZYiPL.png" alt="Социальная инженерия" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Социальная инженерия</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

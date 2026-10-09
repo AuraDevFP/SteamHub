@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Сервисы для статуса Steam, цен, карточек, значков и раздач.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Полезные сайты и инструменты Steam — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://steamdb.info/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 05</span>
+      <h1>Полезные сайты и инструменты Steam</h1>
+      <p>Сервисы для статуса Steam, цен, карточек, значков и раздач.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://steamdb.info/" target="_blank" rel="noopener noreferrer">Открыть SteamDB ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Steam Status</h2>
+    <p>Проверка состояния сервисов Steam и отдельных компонентов.</p>
+    <p>
+      <a href="../redirect.html?url=https://steamstat.us/" target="_blank" rel="noopener noreferrer">Steam Status ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Downdetector</h2>
+    <p>Графики пользовательских сообщений о сбоях. Это не официальный статус Valve, а агрегатор жалоб.</p>
+    <p>
+      <a href="../redirect.html?url=https://downdetector.com/status/steam/" target="_blank" rel="noopener noreferrer">Downdetector — Steam ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>SteamDB</h2>
+    <p>База данных Steam: история цен, изменения приложений, скидки, обновления и статистика онлайна.</p>
+    <p>
+      <a href="../redirect.html?url=https://steamdb.info/" target="_blank" rel="noopener noreferrer">SteamDB ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>BadgeDB и SteamCardExchange</h2>
+    <p>Сервисы для изучения значков, карточек, наборов и связанных с ними цен.</p>
+    <p>
+      <a href="../redirect.html?url=https://badgedb.com/" target="_blank" rel="noopener noreferrer">BadgeDB ↗</a>
+      ·
+      <a href="../redirect.html?url=https://www.steamcardexchange.net/" target="_blank" rel="noopener noreferrer">SteamCardExchange ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Givee.Club</h2>
+    <p>Сервис с заданиями и раздачами. Проверяй правила, разрешения и репутацию сервиса; не передавай пароль или коды подтверждения Steam.</p>
+    <p>
+      <a href="../redirect.html?url=https://givee.club/" target="_blank" rel="noopener noreferrer">Givee.Club ↗</a>
+      ·
+      <a href="../redirect.html?url=https://chromewebstore.google.com/" target="_blank" rel="noopener noreferrer">Магазин расширений Chrome ↗</a>
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Ещё полезные ресурсы</h2>
+    <p>
+      <a href="../redirect.html?url=https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">Магазин Steam</a>
+      ·
+      <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Поддержка Steam</a>
+      ·
+      <a href="../redirect.html?url=https://steamcommunity.com/market/" target="_blank" rel="noopener noreferrer">Торговая площадка</a>
+    </p>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Скриншот</h2>
+    <p class="media-intro"></p>
+    <div class="media-gallery">
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/YwyCJk0IkEhXmSfcRczCs90BlLTwwkEesY4xrjOGIzJ2PXgu-4Pls3y9gWXZxdzyGZ87UKsLzQ_1XPIdXxeaLgwK4j7fLIQRywRpx8YFT0VryWZo-Ijh8VIpZzE53JFZFBvbVh72gfRK/2026-03-27_09-50-20.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/YwyCJk0IkEhXmSfcRczCs90BlLTwwkEesY4xrjOGIzJ2PXgu-4Pls3y9gWXZxdzyGZ87UKsLzQ_1XPIdXxeaLgwK4j7fLIQRywRpx8YFT0VryWZo-Ijh8VIpZzE53JFZFBvbVh72gfRK/2026-03-27_09-50-20.png" alt="Статус серверов" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Статус серверов</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/hkjTmXpePzXnf7uFGqUS_t-bBMc18yI51iXqShhkcIJ4hi9xjK_34YzzhlKXeeWiSDysDlsNOaSN4dvrZqSnG6FORwoOcKBtIwcicClMDFYfcxvnu56nm7zqf5BuzZgc7KCa-MmDEC6R/2026-03-27_09-52-26.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/hkjTmXpePzXnf7uFGqUS_t-bBMc18yI51iXqShhkcIJ4hi9xjK_34YzzhlKXeeWiSDysDlsNOaSN4dvrZqSnG6FORwoOcKBtIwcicClMDFYfcxvnu56nm7zqf5BuzZgc7KCa-MmDEC6R/2026-03-27_09-52-26.png" alt="SteamDB пример" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>SteamDB пример</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/DhCgUagDpaW8TtzRDk2XdWJi4NbIBriXbvfqTRSJY67Dq-emQevb7FKFk6yajWXSpiGbSigKYf5kGhsOy7VnbBm2qw75T5_B6WonhJ7ohuJbRm3hExkybqBPgPNenVpEQx_d1JJdKBCQ/2026-03-27_09-54-51.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/DhCgUagDpaW8TtzRDk2XdWJi4NbIBriXbvfqTRSJY67Dq-emQevb7FKFk6yajWXSpiGbSigKYf5kGhsOy7VnbBm2qw75T5_B6WonhJ7ohuJbRm3hExkybqBPgPNenVpEQx_d1JJdKBCQ/2026-03-27_09-54-51.png" alt="SteamDB пример" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>SteamDB пример</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/T6MkHO2wiqKF3lbUbkmgdKqhEOfepUeLO751jiEbnIN4Q8GPqhRzU9LXS5PbK-uqrsrRfzjIUcHmGpe-zb5JoMPC_A9eSfsUosBeLlX7lK0i8yL8ogvAfckJwa6irUtJg47K0M2KTgl_/2026-03-27_09-57-06.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/T6MkHO2wiqKF3lbUbkmgdKqhEOfepUeLO751jiEbnIN4Q8GPqhRzU9LXS5PbK-uqrsrRfzjIUcHmGpe-zb5JoMPC_A9eSfsUosBeLlX7lK0i8yL8ogvAfckJwa6irUtJg47K0M2KTgl_/2026-03-27_09-57-06.png" alt="SteamCardExchange пример" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>SteamCardExchange пример</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/5vKBWH9qNdPaxSIQeuEz32m7ua-s5ccyHCUBusKvV5t_kr5A8Q2OOdrOXIcmAJPsdt-c6oghbRCp_vuvEgjIxUu_rO88oQHwWc9dCkymG2pbeflVNK4bMi4IQGVicrssqcwnNmAj9JJf/2026-03-27_09-59-19.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/5vKBWH9qNdPaxSIQeuEz32m7ua-s5ccyHCUBusKvV5t_kr5A8Q2OOdrOXIcmAJPsdt-c6oghbRCp_vuvEgjIxUu_rO88oQHwWc9dCkymG2pbeflVNK4bMi4IQGVicrssqcwnNmAj9JJf/2026-03-27_09-59-19.png" alt="Givee.Club пример" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Givee.Club пример</figcaption>
+      </figure>
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/yrVCukMoJx9So7Atcrw1XrmmdEPiAYxtyycJTlCJf3vCJUU9WQMmI4ZdHKqW58CjP-g1hOlbfQtBpTMx2q5npu0FyhWe2dPoLtEO_qTnioIi5Oj8NMPKRwRBScbHtCd1teNV4se-WjkA/2026-03-27_10-02-56.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/yrVCukMoJx9So7Atcrw1XrmmdEPiAYxtyycJTlCJf3vCJUU9WQMmI4ZdHKqW58CjP-g1hOlbfQtBpTMx2q5npu0FyhWe2dPoLtEO_qTnioIi5Oj8NMPKRwRBScbHtCd1teNV4se-WjkA/2026-03-27_10-02-56.png" alt="Givee.Club расширение пример" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Givee.Club расширение пример</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost <span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

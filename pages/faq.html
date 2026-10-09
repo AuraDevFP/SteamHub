@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Короткие ответы и официальные страницы, которые помогают управлять Steam.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>FAQ и полезные ссылки — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 12</span>
+      <h1>FAQ и полезные ссылки</h1>
+      <p>Короткие ответы и официальные страницы, которые помогают управлять Steam.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Открыть поддержку Steam ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+  <section class="content-panel">
+    <h2>Нашли ошибку?</h2>
+    <p>
+      <a href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">Поддержка SteamHub</a>
+      - по поводу ошибок писать сюда.
+    </p>
+    <p>
+      <a href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">Предложить фишку</a>
+      - Хотите поделиться фишкой?
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Где искать официальную помощь</h2>
+    <p>
+      <a href="../redirect.html?url=https://help.steampowered.com/" target="_blank" rel="noopener noreferrer">Поддержка Steam</a>
+      - восстановление доступа, покупки, возвраты и безопасность.
+    </p>
+    <p>
+      <a href="../redirect.html?url=https://steamcommunity.com/discussions/" target="_blank" rel="noopener noreferrer">Обсуждения Steam</a>
+      - вопросы сообщества и пользовательские советы.
+    </p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Можно ли гарантировать безопасность сторонних инструментов?</h2>
+    <p>Нет. Сторонние сайты и программы не одобряются автоматически Steam. Проверяй репутацию, адрес, разрешения и правила конкретной игры. Никогда не вводи пароль или Steam Guard на сторонних страницах.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Почему информация может отличаться?</h2>
+    <p>Интерфейс Steam, доступность функций, расписание распродаж, правила возврата и ограничения семейного доступа могут меняться. В случае расхождения приоритет у актуальных сообщений и экранов официального Steam.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>О проекте</h2>
+    <p>Steam Hub - независимый справочный проект, не связанный с Valve Corporation. Материалы собраны для удобства и не заменяют официальную поддержку.</p>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost<span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

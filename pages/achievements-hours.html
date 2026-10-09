@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Информация о Steam Achievement Manager, часах и достижениях.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <title>Достижения и игровое время (SAM) — Steam Hub</title>
+</head>
+<body class="site-locked">
+
+<div id="site-lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <img class="lock-mark" src="../assets/logo.svg" alt="Steam Hub">
+    <div class="lock-kicker">PRIVATE ACCESS</div>
+    <h1 id="lock-title">Доступ к Steam Hub</h1>
+    <p>Сайт закрыт паролем. Введи пароль, чтобы продолжить.</p>
+    <form id="lock-form">
+      <input id="lock-password" type="password" placeholder="Введите пароль" autocomplete="current-password" aria-label="Пароль" required>
+      <button type="submit">Открыть сайт <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="lock-error" class="lock-error" aria-live="polite"></div>
+    <div class="lock-foot">STEAM HUB · YOUR STEAM, YOUR RULES</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var gate=document.getElementById('site-lock');
+  var form=document.getElementById('lock-form');
+  var input=document.getElementById('lock-password');
+  var error=document.getElementById('lock-error');
+  document.body.classList.add('site-locked');
+  try{
+    if(sessionStorage.getItem('steamhub_access')==='granted'){
+      document.body.classList.remove('site-locked');
+      gate.remove();
+      return;
+    }
+  }catch(e){}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value==='ShizzyBoost'){
+      try{sessionStorage.setItem('steamhub_access','granted')}catch(e){}
+      document.body.classList.remove('site-locked');
+      gate.remove();
+    }else{
+      error.textContent='Неверный пароль. Попробуй ещё раз.';
+      input.value='';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo.svg" alt="Steam Hub" class="logo">
+    <span>STEAM<span class="gradient">HUB</span><small>PLAYER KNOWLEDGE BASE</small></span>
+  </a>
+  <nav>
+    <a href="../index.html">Главная</a>
+    <a href="../index.html#library">База знаний</a>
+    <a href="../redirect.html?url=https://github.com/gibbed/SteamAchievementManager" target="_blank" rel="noopener noreferrer">Открыть сервис ↗</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+</header>
+
+<main class="article-wrap">
+
+  <a class="back" href="../index.html#library">← Все разделы</a>
+
+  <section class="article-hero topic-hero">
+    <div>
+      <span class="eyebrow">STEAM HUB / GUIDE 02</span>
+      <h1>Достижения и игровое время (SAM)</h1>
+      <p>Информация о Steam Achievement Manager, часах и достижениях.</p>
+      <div class="article-actions">
+        <a class="button primary" href="../redirect.html?url=https://github.com/gibbed/SteamAchievementManager" target="_blank" rel="noopener noreferrer">Открыть SAM на GitHub ↗</a>
+        <a class="button ghost" href="../redirect.html?url=https://funpay.com/users/8180891/" target="_blank" rel="noopener noreferrer">ShizzyBoost - FunPay ↗</a>
+      </div>
+    </div>
+    <div class="topic-art topic-art-placeholder" aria-hidden="true">
+      <img src="../assets/logo.svg" alt="">
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Что такое SAM</h2>
+    <p>Steam Achievement Manager (SAM) — сторонний инструмент для просмотра и изменения состояния достижений в играх Steam. Это неофициальная программа, и Valve не гарантирует её безопасность или совместимость.</p>
+    <p><strong>Важно:</strong> использование сторонних инструментов может нарушать правила отдельных игр или влиять на статистику/репутацию. Не существует универсальной гарантии отсутствия санкций.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Как обычно устроена работа</h2>
+    <ol>
+      <li>Скачивай исходники или релизы только из проверенного репозитория.</li>
+      <li>Проверь архив защитным ПО и не запускай неизвестные исполняемые файлы от имени администратора без необходимости.</li>
+      <li>Инструмент может показывать список приложений Steam; выбери нужную игру, только если понимаешь последствия изменения достижений.</li>
+      <li>Перед изменением статистики прочитай документацию и правила конкретной игры.</li>
+    </ol>
+  </section>
+
+  <section class="content-panel">
+    <h2>Как пользоваться?</h2>
+    <ol>
+      <li>Программа выполняет две простые функции: запускает выбранную игру в Steam и при накрутке статистики/достижений корректирует значения.</li>
+      <li><b>Установка</b>: скачать архив, разархивировать в любое удобное место. Для накрутки не обязательно устанавливать игру!</li>
+      <li><b>Накрутка часов</b>: запустите SAM.Game.exe или SAM.picker.exe, выберите игру из списка (двойной клик). Появится окно с названием игры. Оставьте его открытым - часы накручиваются в реальном времени. Можно открыть сразу несколько игр.</li>
+      <li><b>Часы накручиваются реального времени. Будьте аккуратны: суммарные часы за 2 недели могут превышать реально прошедшее время.</b></li>
+      <li>Если нужной игры нет в SAM — укажите её <b>ID</b> из адресной строки магазина Steam. Для сброса достижений нажмите "Commit changes". Пользуйтесь осознанно.</li>
+    </ol>
+  </section>
+
+  <section class="content-panel">
+    <h2>Игровое время</h2>
+    <p>Время в Steam обычно учитывается, когда игра запущена и клиент фиксирует активность. Искусственное изменение или имитация игрового времени сторонними средствами может привести к некорректной статистике. Часы, отображаемые за короткий период, могут выглядеть необычно и вызывать вопросы.</p>
+  </section>
+
+  <section class="content-panel">
+    <h2>Полезные ссылки</h2>
+    <p>
+      <a href="../redirect.html?url=https://github.com/gibbed/SteamAchievementManager" target="_blank" rel="noopener noreferrer">SAM — GitHub</a>
+      ·
+      <a href="../redirect.html?url=https://steamcommunity.com/my/games/" target="_blank" rel="noopener noreferrer">Игры в профиле Steam</a>
+    </p>
+  </section>
+
+  <section class="content-panel media-panel">
+    <h2>Скриншот</h2>
+    <p class="media-intro"></p>
+    <div class="media-gallery">
+
+      <figure class="media-item">
+        <a href="../redirect.html?url=https://psv4.userapi.com/s/v1/d2/ujt05UlEIaVj9L3hDPrjnpmilW5I2HlZMso1KPWX69mcp5xrgxwGlKo06tpqHJn1imu6o3p91gdysXkRr8UBBy_IhCxLU0CI9GU24b7ls8FAmXzxXuZ0t9TF88Pwxp1nXeBYLIvEeCJW/2026-03-27_09-40-08.png" target="_blank" rel="noopener noreferrer">
+          <img src="https://psv4.userapi.com/s/v1/d2/ujt05UlEIaVj9L3hDPrjnpmilW5I2HlZMso1KPWX69mcp5xrgxwGlKo06tpqHJn1imu6o3p91gdysXkRr8UBBy_IhCxLU0CI9GU24b7ls8FAmXzxXuZ0t9TF88Pwxp1nXeBYLIvEeCJW/2026-03-27_09-40-08.png" alt="Пример работы SAM" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <figcaption>Пример работы SAM</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <p class="source-note"></p>
+
+</main>
+
+<footer>
+  © 2026 Steam Hub by AURA - ShizzyBoost <span>Независимый справочный проект, не связан с Valve Corporation.</span>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
